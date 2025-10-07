@@ -95,20 +95,20 @@ public class Map {
     // methods
     private boolean ubPlacer( int[] indexes ) {
         if( gameMap[indexes[0]][indexes[1]].getContentType() == 1 || gameMap[indexes[0]][indexes[1]].getContentType() == 2 ) return false;
-        if( indexes[0]-1 < 0 || gameMap[indexes[0]-1][indexes[1]].getContentType() == 1 || gameMap[indexes[0]-1][indexes[1]].getContentType() == 2 ) return false;
-        if( indexes[0]+1 > 10 || gameMap[indexes[0]+1][indexes[1]].getContentType() == 1 || gameMap[indexes[0]+1][indexes[1]].getContentType() == 2 ) return false;
-        if( indexes[1]-1 < 0 || gameMap[indexes[0]][indexes[1]-1].getContentType() == 1 || gameMap[indexes[0]][indexes[1]-1].getContentType() == 2 ) return false;
-        if( indexes[1]+1 > 10 || gameMap[indexes[0]][indexes[1]+1].getContentType() == 1 || gameMap[indexes[0]][indexes[1]+1].getContentType() == 2 ) return false;
+        if( indexes[0]-1 >= 0 && (gameMap[indexes[0]-1][indexes[1]].getContentType() == 1 || gameMap[indexes[0]-1][indexes[1]].getContentType() == 2) ) return false;
+        if( indexes[0]+1 <= 10 && (gameMap[indexes[0]+1][indexes[1]].getContentType() == 1 || gameMap[indexes[0]+1][indexes[1]].getContentType() == 2) ) return false;
+        if( indexes[1]-1 >= 0 && (gameMap[indexes[0]][indexes[1]-1].getContentType() == 1 || gameMap[indexes[0]][indexes[1]-1].getContentType() == 2) ) return false;
+        if( indexes[1]+1 <= 10 && (gameMap[indexes[0]][indexes[1]+1].getContentType() == 1 || gameMap[indexes[0]][indexes[1]+1].getContentType() == 2) ) return false;
         gameMap[indexes[0]][indexes[1]] = new UnpassableBlock(indexes);
         return true;
     }
     private boolean poPlacer( int[] indexes ) {
         if( gameMap[indexes[0]][indexes[1]].getContentType() == 1 || gameMap[indexes[0]][indexes[1]].getContentType() == 2 || gameMap[indexes[0]][indexes[1]].getContentType() == 3 ) return false;
-        if( indexes[0]-1 < 0 || gameMap[indexes[0]-1][indexes[1]].getContentType() == 1 ) return false;
-        if( indexes[0]+1 > 10 || gameMap[indexes[0]+1][indexes[1]].getContentType() == 1 ) return false;
-        if( indexes[1]-1 < 0 || gameMap[indexes[0]][indexes[1]-1].getContentType() == 1 ) return false;
-        if( indexes[1]+1 > 10 || gameMap[indexes[0]][indexes[1]+1].getContentType() == 1 ) return false;
-        if( gameMap[indexes[0]-1][indexes[1]].getContentType() != 0 ) return false;
+        if( indexes[0]-1 >= 0 && gameMap[indexes[0]-1][indexes[1]].getContentType() == 1 ) return false;
+        if( indexes[0]+1 <= 10 && gameMap[indexes[0]+1][indexes[1]].getContentType() == 1 ) return false;
+        if( indexes[1]-1 >= 0 && gameMap[indexes[0]][indexes[1]-1].getContentType() == 1 ) return false;
+        if( indexes[1]+1 <= 10 && gameMap[indexes[0]][indexes[1]+1].getContentType() == 1 ) return false;
+        if( gameMap[indexes[0]][indexes[1]].getContentType() != 0 ) return false;
         gameMap[indexes[0]][indexes[1]] = new PickableObject(indexes);
         return true;
     }

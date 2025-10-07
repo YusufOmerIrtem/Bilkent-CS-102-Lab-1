@@ -17,11 +17,11 @@ abstract public class GameContent {
     public void setContentIndexes(int[] contentIndexes) {
         this.contentIndexes = contentIndexes;
     }
-    abstract public void display();
     public int getPoint() {
         return point;
     }
     public void setPoint(int point) {
         this.point = point;
     }
+    abstract public void display();
 }

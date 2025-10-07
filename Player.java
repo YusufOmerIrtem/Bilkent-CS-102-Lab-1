@@ -27,13 +27,14 @@ public class Player extends GameContent {
     public void addPickedObject(GameContent pickedObject) {
         pickedObjects.add(pickedObject);
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
+    }
+    public String toString() {
+        return playerNumber + ") " + name;
     }
     
 }
