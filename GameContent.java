@@ -2,6 +2,7 @@ abstract public class GameContent {
     // variables
     private int contentType;
     private int[] contentIndexes;
+    private int point;
 
     // methods
     public int getContentType() {
@@ -17,4 +18,10 @@ abstract public class GameContent {
         this.contentIndexes = contentIndexes;
     }
     abstract public void display();
+    public int getPoint() {
+        return point;
+    }
+    public void setPoint(int point) {
+        this.point = point;
+    }
 }

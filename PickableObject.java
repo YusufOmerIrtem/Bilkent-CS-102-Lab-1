@@ -5,24 +5,14 @@ public class PickableObject extends GameContent {
     public PickableObject( int[] indexes ) {
         setContentType(3);
         setContentIndexes(indexes);
-        setPoint();
+        setPoint(randomPoint.nextInt(2)+1);
     }
 
     // variables
-    private int point;
-    Random randomPoint = new Random();
+    private static Random randomPoint = new Random();
 
     // methods
     public void display() {
-        System.out.println("* ");
+        System.out.print("* ");
     }
-
-    public int getPoint() {
-        return point;
-    }
-
-    private void setPoint() {
-        point = randomPoint.nextInt(2)+1;
-    }
-    
 }

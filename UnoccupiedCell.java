@@ -3,10 +3,11 @@ public class UnoccupiedCell extends GameContent {
     public UnoccupiedCell( int[] indexes ){
         setContentType(0);
         setContentIndexes(indexes);
+        setPoint(0);
     }
 
     // methods
     public void display() {
-        System.out.println(". ");
+        System.out.print(". ");
     }
 }

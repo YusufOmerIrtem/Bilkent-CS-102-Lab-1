@@ -6,7 +6,7 @@ public class Map {
         // initialise map base
         gameMap = new GameContent[11][11];
         for( int i = 0; i < 11; i++ ) {
-            for( int j = 0; j < 10; j++ ) {
+            for( int j = 0; j < 11; j++ ) {
                 int[] ucIndexes = {i,j};
                 gameMap[i][j] = new UnoccupiedCell(ucIndexes);
             }
@@ -73,7 +73,7 @@ public class Map {
             do {
                 indexes[0] = contentNumber.nextInt(11);
                 indexes[1] = contentNumber.nextInt(11);
-            } while( ubPlacer(indexes) );
+            } while( !ubPlacer(indexes) );
         }
 
         // initialise pickable objects
@@ -82,30 +82,32 @@ public class Map {
             do {
                 indexes[0] = contentNumber.nextInt(11);
                 indexes[1] = contentNumber.nextInt(11);
-            } while( poPlacer(indexes) );
+            } while( !poPlacer(indexes) );
         }
     }
 
     // variables
-    GameContent[][] gameMap;
-    Random contentNumber = new Random();
+    private GameContent[][] gameMap;
+    private Random contentNumber = new Random();
     final int U_B_NUMBER = 5;
     final int P_O_NUMBER = 10;
 
     // methods
     private boolean ubPlacer( int[] indexes ) {
-        if( indexes[0]-1 >= 0 && gameMap[indexes[0]-1][indexes[1]].getContentType() == 1 ) return false;
-        if( indexes[0]+1 <= 10 && gameMap[indexes[0]+1][indexes[1]].getContentType() == 1 ) return false;
-        if( indexes[1]-1 >= 0 && gameMap[indexes[0]][indexes[1]-1].getContentType() == 1 ) return false;
-        if( indexes[1]+1 <= 10 && gameMap[indexes[0]][indexes[1]+1].getContentType() == 1 ) return false;
+        if( gameMap[indexes[0]][indexes[1]].getContentType() == 1 || gameMap[indexes[0]][indexes[1]].getContentType() == 2 ) return false;
+        if( indexes[0]-1 < 0 || gameMap[indexes[0]-1][indexes[1]].getContentType() == 1 || gameMap[indexes[0]-1][indexes[1]].getContentType() == 2 ) return false;
+        if( indexes[0]+1 > 10 || gameMap[indexes[0]+1][indexes[1]].getContentType() == 1 || gameMap[indexes[0]+1][indexes[1]].getContentType() == 2 ) return false;
+        if( indexes[1]-1 < 0 || gameMap[indexes[0]][indexes[1]-1].getContentType() == 1 || gameMap[indexes[0]][indexes[1]-1].getContentType() == 2 ) return false;
+        if( indexes[1]+1 > 10 || gameMap[indexes[0]][indexes[1]+1].getContentType() == 1 || gameMap[indexes[0]][indexes[1]+1].getContentType() == 2 ) return false;
         gameMap[indexes[0]][indexes[1]] = new UnpassableBlock(indexes);
         return true;
     }
     private boolean poPlacer( int[] indexes ) {
-        if( indexes[0]-1 >= 0 && gameMap[indexes[0]-1][indexes[1]].getContentType() == 1 ) return false;
-        if( indexes[0]+1 <= 10 && gameMap[indexes[0]+1][indexes[1]].getContentType() == 1 ) return false;
-        if( indexes[1]-1 >= 0 && gameMap[indexes[0]][indexes[1]-1].getContentType() == 1 ) return false;
-        if( indexes[1]+1 <= 10 && gameMap[indexes[0]][indexes[1]+1].getContentType() == 1 ) return false;
+        if( gameMap[indexes[0]][indexes[1]].getContentType() == 1 || gameMap[indexes[0]][indexes[1]].getContentType() == 2 || gameMap[indexes[0]][indexes[1]].getContentType() == 3 ) return false;
+        if( indexes[0]-1 < 0 || gameMap[indexes[0]-1][indexes[1]].getContentType() == 1 ) return false;
+        if( indexes[0]+1 > 10 || gameMap[indexes[0]+1][indexes[1]].getContentType() == 1 ) return false;
+        if( indexes[1]-1 < 0 || gameMap[indexes[0]][indexes[1]-1].getContentType() == 1 ) return false;
+        if( indexes[1]+1 > 10 || gameMap[indexes[0]][indexes[1]+1].getContentType() == 1 ) return false;
         if( gameMap[indexes[0]-1][indexes[1]].getContentType() != 0 ) return false;
         gameMap[indexes[0]][indexes[1]] = new PickableObject(indexes);
         return true;
@@ -114,8 +116,16 @@ public class Map {
         for( int i = 0; i < 11; i++ ) {
             for( int j = 0; j < 11; j++ ) {
                 gameMap[i][j].display();
+                System.out.print(" ");
             }
             System.out.println();
         }
     }
+    public GameContent[][] getGameMap() {
+        return gameMap;
+    }
+    public void setGameMap(GameContent[][] gameMap) {
+        this.gameMap = gameMap;
+    }
+    
 }

@@ -3,10 +3,11 @@ public class UnpassableBlock extends GameContent {
     public UnpassableBlock( int[] indexes ) {
         setContentType(2);
         setContentIndexes(indexes);
+        setPoint(0);
     }
 
     // methods
     public void display() {
-        System.out.println("X ");
+        System.out.print("X ");
     }
 }
